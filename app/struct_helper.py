@@ -1,0 +1,13 @@
+import struct
+from typing import Any, Tuple
+
+# todo: masih ngasal ini
+STRUCT_FORMAT = "=B"
+
+
+def read_struct(payload: bytes) -> Tuple[int, float, float, float, int]:
+    """Read struct from bytes"""
+    data = struct.unpack(STRUCT_FORMAT, payload)
+
+    # id, temp, hum, light, tip
+    return data[0], data[1], data[2], data[3], data[4]
