@@ -49,7 +49,13 @@ def on_recv(payload: Any) -> None:
         # insert data to database
         entry = db.sensorreading.update(
             where={"id": current_index},
-            data={"temperature": temp, "humidity": hum, "lux": light, "tips": tip},
+            data={
+                "nodeId": device_id,
+                "temperature": temp,
+                "humidity": hum,
+                "lux": light,
+                "tips": tip,
+            },
         )
 
         if entry is None:
