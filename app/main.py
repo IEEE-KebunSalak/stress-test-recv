@@ -74,7 +74,15 @@ def job() -> None:
 
     print("[Schedule]: Begin to request data from all nodes.")
 
-    entry: SensorReading = db.sensorreading.create()
+    entry: SensorReading = db.sensorreading.create(
+        data={
+            "nodeId": None,
+            "temperature": None,
+            "humidity": None,
+            "lux": None,
+            "tips": None,
+        }
+    )
     # set current index
     current_index = entry.id
 
