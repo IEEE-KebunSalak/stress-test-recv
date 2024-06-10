@@ -106,7 +106,7 @@ def setup() -> None:
 
     # assign job ke scheduler
     print("[setup]: setting up scheduler")
-    schedule.every(30).minutes.do(job)
+    schedule.every().hour.at(":00").do(job)
 
     print("[setup]: setup done...")
 
