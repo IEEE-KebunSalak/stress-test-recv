@@ -38,6 +38,8 @@ current_index = 0
 
 def on_recv(payload: Any) -> None:
     """Callback function when data received from the LoRa module"""
+    global current_index
+
     try:
         payload_struct = payload.message
         device_id, temp, hum, light, tip = read_struct(payload_struct)
@@ -77,7 +79,10 @@ def job() -> None:
     # set current index
     current_index = entry.id
 
-    lora.send("REQ_DATA", 255)  # broadcast message to all nodes
+    # gtau bisa send ini apa nggak
+
+    # 0x69 packet untuk request data
+    lora.send(0x69, 255)  # broadcast message to all nodes
 
 
 def setup() -> None:
