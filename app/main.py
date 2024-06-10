@@ -19,10 +19,10 @@ from config import (
 
 # global objects
 lora = LoRa(
-    RFM95_PORT,
-    RFM95_CS,
-    RFM95_INT,
-    CLIENT_ADDRESS,
+    spi_port=RFM95_PORT,
+    spi_channel=RFM95_CS,
+    interrupt_pin=RFM95_INT,
+    my_address=CLIENT_ADDRESS,
     reset_pin=RFM95_RST,
     freq=RF95_FREQ,
     tx_power=RF95_POW,
