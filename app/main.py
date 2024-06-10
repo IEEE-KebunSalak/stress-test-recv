@@ -13,7 +13,6 @@ from config import (
     RF95_FREQ,
     RF95_POW,
     CLIENT_ADDRESS,
-    NODE_ADDRESSES,
     ModemConfig,
 )
 
@@ -90,17 +89,24 @@ def setup() -> None:
 
     global lora, db
 
+    print("[setup]: connecting to sqlite database")
     db.connect()
 
+    print("[setup]: setting up LoRa module")
     lora.set_mode_rx()
     lora.on_recv = on_recv
 
     # assign job ke scheduler
+    print("[setup]: setting up scheduler")
     schedule.every(30).minutes.do(job)
+
+    print("[setup]: setup done...")
 
 
 def main() -> None:
     """Main Program Loop"""
+
+    print("[Main]: Running main program loop...")
 
     try:
         while True:
