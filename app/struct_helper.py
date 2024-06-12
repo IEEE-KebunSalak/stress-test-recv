@@ -2,8 +2,8 @@ import struct
 from typing import Any, Tuple
 
 # todo: masih ngasal ini
-# 'B' for uint8_t, 'f' for float, 'i' for int, 'H' for uint16_t
-STRUCT_FORMAT = "BfffH"
+# 'B' for uint8_t, 'f' for float, 'i' for int, 'I' for uint
+STRUCT_FORMAT = "BfffI"
 
 
 def read_struct(payload: bytes) -> Tuple[int, float, float, float, int]:
