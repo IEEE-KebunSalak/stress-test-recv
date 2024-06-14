@@ -47,20 +47,32 @@ def on_recv(payload: Any) -> None:
         print("Received:", f"{temp=}, {hum=}, {light=}, {tip=}")
         print("RSSI: {}; SNR: {}".format(payload.rssi, payload.snr))
 
-        # insert data to database
-        entry = db.sensorreading.update(
-            where={"id": current_index},
+        # # insert data to database
+        # entry = db.sensorreading.update(
+        #     where={"id": current_index},
+        #     data={
+        #         "nodeId": device_id,
+        #         "temperature": temp,
+        #         "humidity": hum,
+        #         "lux": light,
+        #         "tips": tip,
+        #     },
+        # )
+
+        # if entry is None:
+        #     print("[Error]: Cannot find db entry.")
+
+        entry = db.sensorreading.create(
             data={
                 "nodeId": device_id,
                 "temperature": temp,
                 "humidity": hum,
                 "lux": light,
                 "tips": tip,
-            },
+            }
         )
 
-        if entry is None:
-            print("[Error]: Cannot find db entry.")
+        print("[Success]: Data inserted to database.")
 
     except:
         print("[Error]: Ignoring data since it's unreadable.")
@@ -106,7 +118,9 @@ def setup() -> None:
 
     # assign job ke scheduler
     print("[setup]: setting up scheduler")
-    schedule.every().hour.at(":00").do(job)
+
+    # scheduler will be unused since we use esp timer
+    # schedule.every().hour.at(":00").do(job)
 
     print("[setup]: setup done...")
 
